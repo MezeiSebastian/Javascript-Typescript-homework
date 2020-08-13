@@ -4,7 +4,7 @@ const start = Date.now();
 //Method 1 
 //Time 15961 - 27890
 
-/*
+
 function convertBase(value: string, from_base: number, to_base: number) {
   //Sets the caracters needed for the base of the numbers
   var range = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/".split(
@@ -36,13 +36,13 @@ function convertBase(value: string, from_base: number, to_base: number) {
 
 //Read from file and calling the convertBase function
 fs.readFile("data.csv", "utf8", function (err: any, data: any) {
-  let a = data.split("\n");
+  let inputData = data.split("\n");
   const printToFile = 100000;
   
-  for (let i = 0; i < a.length; i++) {
-    let b = a[i].split(",");
+  for (let i = 0; i < inputData.length; i++) {
+    let splitData = inputData[i].split(",");
     try {
-      let c = convertBase(b[0], Number(b[1]), Number(b[2])) + "\n";
+      let c = convertBase(splitData[0], Number(splitData[1]), Number(splitData[2])) + "\n";
       if (i % printToFile === 0) {
         fs.appendFile("my_file.txt", c, function (err: any) {
           if (err) throw err;
@@ -57,22 +57,23 @@ fs.readFile("data.csv", "utf8", function (err: any, data: any) {
 
 //Method 2
 //Time 1972-2714 
-*/
 
+/*
 fs.readFile("data.csv", "utf8", function (err: any, data: any) {
-  let a = data.split("\n");
-  let c = [];
-  for (let i = 0; i < a.length; i++) {
-    let b = a[i].split(",");
+  let inputData = data.split("\n");
+  let convertedNumbers = [];
+  for (let i = 0; i < inputData.length; i++) {
+    let splitData = inputData[i].split(",");
     try{
-    c.push(parseInt(b[0],Number(b[1])).toString(Number(b[2])));
+    convertedNumbers.push(parseInt(splitData[0],Number(splitData[1])).toString(Number(splitData[2])));
     }catch{};
   }
   var file = fs.createWriteStream("my-file.txt");
   file.on('error',function(err: any){});
-  c.forEach(function(v){file.write(v+'\n');});
+  convertedNumbers.forEach(function(v){file.write(v+'\n');});
   file.end();
 
   console.log(Date.now() - start);
 });
+*/
 
